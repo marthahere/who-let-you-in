@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale="1.0">
+    <title>Who Let You In?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main id="game">
+        <!-- Title Screen -->
+        <section id="title-screen">
+            <h1>Who Let You In?</h1>
+            
+            <button id="play-button">Play</button>
+            <button id="play-button">Help</button>
+
+            <div>
+                <label>
+                    AI Assistant
+                    <button id="ai-button">Coming Soon</button>
+                </label>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section id="intro-screen">
+            <h2>Welcome, Moderator</h2>
+
+            <p>
+                You have been assigned as a moderator for the community server.
+            </p>
+
+            <p>
+                Your responsibility is to verify the identities of people requestion access to the community."
+            </p>
+
+            <p>
+                Some applicants are legitimate residents.
+                Others may be impersonating someone else.
+            </p>
+
+            <button id="begin-button">Begin</button>
+        </section>
+        
+        <!-- Applicant -->
+        <section id="applicant-screen">
+            <h2>Applicant</h2>
+
+            <div id="applicant-profile">
+                <div id="applicant-avatar"></div>
+
+                <h3 id="applicant-name">Applicant Name</h3>
+
+                <p>Age: <span id="applicant-age"></span></p>
+                <p>Birthday: <span id="applicant-birthday"></span></p>
+                <p>Occupation: <span id="applicant-occupation"></span></p>
+                <p>School: <span id="applicant-school"></span></p>
+                <p>Graduation: <span id="applicant-graduation"></span></p>
+                <p>Username: <span id="applicant-username"></span></p>
+            </div>
+
+            <div id="joining-reason">
+                <h3>Reason for joining</h3>
+                <p id="applicant-reason"></p>
+            </div>
+
+            <button id="investigation-button">Investigate</button>
+        </section>
+
+        <!-- Investigation -->
+        <section id="investigation-screen">
+            <h2>Investigation</h2>
+
+            <div id="investigation-tools">
+
+                <button id="records-button">Records</button>
+                <button id="digital-button">Digital Footprint</button>
+                <button id="account-button">Account History</button>
+                <button id="people-button">Connected People</button>
+                <button id="messages-button">Messages</button>
+
+            </div>
+
+            <div id="evidence-area">
+                <!-- JavaScript will put evidence here -->
+            </div>
+
+            <div id="notebook">
+                <h3>Notebook</h3>
+                <textarea id="notes"></textarea>
+            </div>
+
+            <button id="accept-button">Accept</button>
+            <button id="reject-button">Reject</button>
+
+        </section>
+
+        <!-- Result -->
+        <section id="result-screen">
+
+            <h2 id="result-title"></h2>
+            <p id="result-message"></p>
+
+            <button id="next-button">Next Applicant</button>
+
+        </section>
+
+        <!-- Game Over -->
+        <section id="game-over-screen">
+
+            <h2>Game Over</h2>
+            <p id="game-over-message"></p>
+
+            <button id="restart-message">Play Again</button>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
