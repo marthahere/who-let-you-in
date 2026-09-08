@@ -40,26 +40,26 @@ Move to the next applicant. Repeat until the player reaches a failure condition.
 The player has access to a notebook during investigations to write down any important information.
 
 The application may have information such as:
-Name
-Age
-Birthday
-Occupation
-School
-Graduation year
-Username
-Account information
-Reason for joining
-Other personal details
+- Name
+- Age
+- Birthday
+- Occupation
+- School
+- Graduation year
+- Username
+- Account information
+- Reason for joining
+- Other personal details
 Not every case will use every piece of information.
 
 Example
 An applicant might claim:
-Name: Emma Carter
-Age: 19
-School: Bellwood High
-Graduation year: 2025
-Username: EmmaCarter19
-Reason for joining: "My best friend Emma convinced me to join."
+- Name: Emma Carter
+- Age: 19
+- School: Bellwood High
+- Graduation year: 2025
+- Username: EmmaCarter19
+- Reason for joining: "My best friend Emma convinced me to join."
 The player can then investigate these claims and determine whether they are consistent with the available evidence.
 
 5. Accept / Reject
@@ -74,14 +74,12 @@ explanation of the important evidence. The failure/scoring count is also updated
 6. Failure / Scoring System
 The player has to balance two risks:
 Accepting Fake Applicants
-3 fake applicants accepted
+**3 fake applicants accepted = Game Over**
 The community server becomes compromised.
-Game Over
 
 Rejecting Legitimate Applicants
-5 legitimate applicants rejected
+**5 legitimate applicants rejected = Game Over**
 The community loses credibility because too many real residents are being denied access.
-Game Over
 
 7. Profile / Visual Identity
 The game should not require manually drawing a unique portrait for every person.
@@ -89,13 +87,13 @@ Procedural Visual Identity
 Each person can have a unique computer-generated visual identity.
 
 Possible elements:
-Geometric shapes
-Lines
-Patterns
-Symbols
-Arrangements
-Colors
-Other visual identifiers
+- Geometric shapes
+- Lines
+- Patterns
+- Symbols
+- Arrangements
+- Colors
+- Other visual identifiers
 
 The visual identity would be generated from the person's unique internal ID.
 The same person should always have the same visual identity whenever they appear.
@@ -110,32 +108,32 @@ Comparing profiles across different records.
 8. Future Expansion
 These ideas are not required for V1 but could be added later.
 
--Multiple Days / Shifts:
+- Multiple Days / Shifts:
 Different investigation shifts.
 New applicants each day.
 Possible progression through the story.
 
--Increasing Difficulty:
+- Increasing Difficulty:
 More complicated contradictions.
 Multiple connected people.
 Larger timelines.
 Cases requiring several pieces of evidence.
 
--Connected Cases:
+- Connected Cases:
 Information from one case can become relevant later.
 Previous applicants or people can return.
 Events can connect multiple investigations.
 
--Recurring Characters:
+- Recurring Characters:
 Important people can appear in multiple cases.
 Their records can develop over time.
 
--Twins / Siblings:
+- Twins / Siblings:
 More complex identity cases involving people with similar information.
 Shared birthdays, schools or locations.
 Different usernames and personal records.
 
--Possible AI features:
+- Possible AI features:
 Search through available evidence.
 Summarize information.
 Point out possible contradictions.
@@ -143,12 +141,12 @@ Answer questions about records.
 Help navigate information.
 The AI should assist the player
 
-9. 10. Investigation System
+9. Investigation System
 The investigation system is the main part of the game.
 Different cases can use different investigation methods. Not every case should use every method.
 Some cases may have one important inconsistency while harder cases may require the player to connect several pieces of evidence.
 
-A. Age and Birthday
+- A. Age and Birthday
 The applicant's stated age should match their birthday and the current date.
 Possible inconsistencies:
 Age does not match birthday.
@@ -156,7 +154,7 @@ Applicant claims to be older or younger than their actual age.
 Birthday conflicts with another record.
 The player may need to do simple age/date calculations.
 
-B. School Records
+- B. School Records
 School information can be compared with official records.
 Possible inconsistencies:
 Applicant attended the wrong school.
@@ -166,7 +164,7 @@ Applicant claims to have attended school with someone who was not there at the s
 School dates conflict with another part of their story.
 School information can become more useful when combined with relationships.
 
-C. Timeline Inconsistencies
+- C. Timeline Inconsistencies
 The player must construct a timeline from accurate records.
 Example:
 Applicant says they moved away from Bellwood in 2022.
@@ -183,7 +181,7 @@ Events
 Locations
 The challenge is connecting the dates correctly.
 
-D. Digital Footprint
+- D. Digital Footprint
 The applicant can have an online history.
 Possible information:
 Previous usernames
@@ -195,7 +193,7 @@ Messages
 Public activity
 The player can compare the applicant's current claims with their previous digital footprint.
 
-E. Username Changes
+- E. Username Changes
 Username history can reveal inconsistencies.
 Example:
 Applicant says they have always used EmmaCarter.
@@ -205,7 +203,7 @@ A username change does not automatically mean the applicant is fake.
 The player needs to consider when and why the username changed.
 Username history becomes more important when combined with other evidence.
 
-F. Username / Visual Similarity
+- F. Username / Visual Similarity
 An impersonating account may use a username that looks very similar to another person's username.
 Possible examples:
 Similar spelling
@@ -216,7 +214,7 @@ Visually confusing characters such as lowercase l and uppercase I
 The player needs to compare the exact characters rather than assuming two usernames are the same.
 This can introduce the idea of digital impersonation.
 
-G. Suspicious Messages
+- G. Suspicious Messages
 Messages can contain clues about an account's behavior.
 Possible examples:
 Someone asks another user for their email.
@@ -231,7 +229,7 @@ Protecting credentials
 Verification codes
 The game focuses on recognizing suspicious behavior rather than teaching players how to perform it.
 
-H. Account Creation History
+- H. Account Creation History
 The account's creation date can be compared with what the applicant claims.
 Example:
 Applicant says their account has existed for five years.
@@ -241,7 +239,7 @@ Account is newer than claimed.
 Applicant claims to have used an account before it existed.
 Account history conflicts with another timeline.
 
-I. Login History / Activity
+- I. Login History / Activity
 The player can inspect account activity when relevant.
 Possible information:
 Login dates
@@ -255,7 +253,7 @@ Official activity shows the account being used during that period.
 Important:
 Unusual activity should be treated as a clue, not automatic proof that someone is fake.
 
-J. Connected People Search
+- J. Connected People Search
 The investigation interface can include a search bar for connected people.
 Search System
 The player can search for a person's name or username.
@@ -265,6 +263,7 @@ A person may have one relevant connection.
 A person may have several connections.
 Some searches may return no result.
 The available search results can vary between cases.
+
 Example
 Applicant says:
 "My best friend Emma convinced me to join."
@@ -276,7 +275,7 @@ Has no record of living in Bellwood.
 This can contradict the applicant's story.
 The player then decides whether this contradiction is important enough to affect the final decision.
 
-K. Relationships
+- K. Relationships
 Relationships can connect different profiles and records.
 Possible relationships:
 Friend
@@ -292,7 +291,7 @@ Applicant claims someone is their classmate.
 The person's school records show they attended a different school.
 The player must connect the relationship claim with the school evidence.
 
-L. Twins
+- L. Twins
 Twins can create difficult identity cases.
 Two real people may share:
 Birthday
