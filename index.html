@@ -1,126 +1,224 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width", initial-scale="1.0">
-    <title>Who Let You In?</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Who Let You In?</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <main id="game">
-        <!-- Title Screen -->
-        <section id="title-screen">
-            <h1>Who Let You In?</h1>
-            
-            <button id="play-button">Play</button>
-            <button id="play-button">Help</button>
 
-            <div>
-                <label>
-                    AI Assistant
-                    <button id="ai-button">Coming Soon</button>
-                </label>
-            </div>
-        </section>
+  <!-- ======================================================
+       SCREEN 1: TITLE SCREEN
+  ======================================================= -->
+  <section id="screen-title" class="screen active">
+    <div class="title-bg-shape"></div>
+    <div class="title-content">
+      <p class="eyebrow">ACCESS REVIEW TERMINAL</p>
+      <h1 class="game-title">WHO LET<span class="title-break">YOU IN?</span></h1>
+      <div class="title-buttons">
+        <button id="btn-play" class="btn btn-primary">PLAY</button>
+        <button id="btn-help" class="btn btn-secondary">HELP</button>
+      </div>
+    </div>
 
-        <!-- Introduction -->
-        <section id="intro-screen">
-            <h2>Welcome, Moderator</h2>
+    <div class="title-toggles">
+      <div class="toggle-row">
+        <span class="toggle-label">MUSIC</span>
+        <button id="toggle-music" class="toggle-switch" data-on="false">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">AI ASSISTANT</span>
+        <span class="coming-soon">COMING SOON</span>
+      </div>
+    </div>
+  </section>
 
-            <p>
-                You have been assigned as a moderator for the community server.
-            </p>
+  <!-- ======================================================
+       SCREEN 2: HELP SCREEN
+  ======================================================= -->
+  <section id="screen-help" class="screen">
+    <div class="panel help-panel">
+      <h2 class="panel-title">HOW THIS WORKS</h2>
+      <p class="help-intro">
+        Applicants fill out a form. Some of what they say checks out. Some of it doesn't.
+        Your job is to figure out which is which before you decide.
+      </p>
+      <ul class="help-list">
+        <li><strong>Records</strong> — the official file on this person. Names, birthdays, schools. Sometimes more than one person shows up with a similar name.</li>
+        <li><strong>Digital Footprint</strong> — posts, comments, replies. Most of it is noise. Some of it isn't.</li>
+        <li><strong>Account History</strong> — when the account was made, and what usernames it's used.</li>
+        <li><strong>Connected People</strong> — references the applicant listed. Call them. Ask about the applicant. Listen for anything that doesn't add up.</li>
+      </ul>
+      <p class="help-outro">
+        Take notes as you go. Nothing gets flagged for you automatically.
+        When you've made up your mind: <strong>ACCEPT</strong> or <strong>REJECT</strong>.
+      </p>
+      <button id="btn-help-back" class="btn btn-secondary">BACK</button>
+    </div>
+  </section>
 
-            <p>
-                Your responsibility is to verify the identities of people requestion access to the community."
-            </p>
+  <!-- ======================================================
+       SCREEN 3: INTRODUCTION SCREEN
+  ======================================================= -->
+  <section id="screen-intro" class="screen">
+    <div class="panel intro-panel">
+      <p class="eyebrow">FIRST SHIFT</p>
+      <p class="intro-text">
+        You're the new moderator for the community's access desk.<br /><br />
+        People apply to join all the time. Most of them are exactly who they say they are.
+        A few aren't.<br /><br />
+        You'll get their application, and you'll have access to records, online activity,
+        and anyone they've listed as a reference. What you do with that is up to you.<br /><br />
+        Let's see how you do.
+      </p>
+      <button id="btn-begin" class="btn btn-primary">BEGIN</button>
+    </div>
+  </section>
 
-            <p>
-                Some applicants are legitimate residents.
-                Others may be impersonating someone else.
-            </p>
+  <!-- ======================================================
+       SCREEN 4: APPLICANT SCREEN
+       Wide rectangular profile card, not a tall phone-shaped card.
+  ======================================================= -->
+  <section id="screen-applicant" class="screen">
+    <div class="panel applicant-card">
+      <div class="applicant-card-header">
+        <p class="applicant-number" id="app-number">APPLICANT #0000</p>
+        <p class="controls-label">APPLICANT INFORMATION</p>
+      </div>
 
-            <button id="begin-button">Begin</button>
-        </section>
-        
-        <!-- Applicant -->
-        <section id="applicant-screen">
-            <h2>Applicant</h2>
+      <div class="applicant-card-body">
+        <canvas id="app-avatar-canvas" width="120" height="120" class="avatar-large"></canvas>
 
-            <div id="applicant-profile">
-                <div id="applicant-avatar"></div>
+        <div class="applicant-main">
+          <h2 class="applicant-name" id="app-name">Name</h2>
+          <div class="applicant-fields-grid">
+            <div class="field"><span class="field-label">AGE</span><span class="field-value" id="app-age">--</span></div>
+            <div class="field"><span class="field-label">BIRTHDAY</span><span class="field-value" id="app-birthday">--</span></div>
+            <div class="field"><span class="field-label">OCCUPATION</span><span class="field-value" id="app-occupation">--</span></div>
+            <div class="field"><span class="field-label">SCHOOL</span><span class="field-value" id="app-school">--</span></div>
+            <div class="field"><span class="field-label">GRADUATION YEAR</span><span class="field-value" id="app-gradyear">--</span></div>
+            <div class="field"><span class="field-label">USERNAME</span><span class="field-value" id="app-username">--</span></div>
+          </div>
+        </div>
+      </div>
 
-                <h3 id="applicant-name">Applicant Name</h3>
+      <div class="applicant-reason">
+        <span class="field-label">REASON FOR JOINING</span>
+        <p id="app-reason">--</p>
+      </div>
 
-                <p>Age: <span id="applicant-age"></span></p>
-                <p>Birthday: <span id="applicant-birthday"></span></p>
-                <p>Occupation: <span id="applicant-occupation"></span></p>
-                <p>School: <span id="applicant-school"></span></p>
-                <p>Graduation: <span id="applicant-graduation"></span></p>
-                <p>Username: <span id="applicant-username"></span></p>
-            </div>
+      <button id="btn-investigate" class="btn btn-primary">INVESTIGATE</button>
+    </div>
+  </section>
 
-            <div id="joining-reason">
-                <h3>Reason for joining</h3>
-                <p id="applicant-reason"></p>
-            </div>
+  <!-- ======================================================
+       SCREEN 5: INVESTIGATION SCREEN
+  ======================================================= -->
+  <section id="screen-investigation" class="screen">
+    <div class="investigation-layout">
 
-            <button id="investigation-button">Investigate</button>
-        </section>
+      <!-- LEFT SIDE -->
+      <div class="panel invest-left">
+        <canvas id="inv-avatar-canvas" width="80" height="80" class="avatar-small"></canvas>
+        <h3 class="invest-name" id="inv-name">Name</h3>
+        <p class="invest-number" id="inv-number">APPLICANT #0000</p>
 
-        <!-- Investigation -->
-        <section id="investigation-screen">
-            <h2>Investigation</h2>
+        <p class="controls-label">APPLICATION</p>
+        <div class="invest-summary">
+          <div class="field"><span class="field-label">AGE</span><span class="field-value" id="inv-age">--</span></div>
+          <div class="field"><span class="field-label">BIRTHDAY</span><span class="field-value" id="inv-birthday">--</span></div>
+          <div class="field"><span class="field-label">SCHOOL</span><span class="field-value" id="inv-school">--</span></div>
+          <div class="field"><span class="field-label">GRAD YEAR</span><span class="field-value" id="inv-gradyear">--</span></div>
+          <div class="field"><span class="field-label">USERNAME</span><span class="field-value" id="inv-username">--</span></div>
+        </div>
 
-            <div id="investigation-tools">
+        <div class="notebook-panel">
+          <p class="controls-label">NOTES</p>
+          <textarea id="notebook" placeholder="Track dates, names, anything that seems off..."></textarea>
+        </div>
+      </div>
 
-                <button id="records-button">Records</button>
-                <button id="digital-button">Digital Footprint</button>
-                <button id="account-button">Account History</button>
-                <button id="people-button">Connected People</button>
-                <button id="messages-button">Messages</button>
+      <!-- RIGHT SIDE -->
+      <div class="invest-right">
 
-            </div>
+        <!-- Arrow-based category navigation -->
+        <div class="category-nav">
+          <button id="cat-prev" class="category-arrow" aria-label="Previous category">&#8249;</button>
+          <span class="category-label" id="category-label">RECORDS</span>
+          <button id="cat-next" class="category-arrow" aria-label="Next category">&#8250;</button>
+        </div>
 
-            <div id="evidence-area">
-                <!-- JavaScript will put evidence here -->
-            </div>
+        <div class="panel evidence-panel">
+          <div id="evidence-area" class="evidence-area"></div>
+        </div>
 
-            <div id="notebook">
-                <h3>Notebook</h3>
-                <textarea id="notes"></textarea>
-            </div>
+        <div class="decision-row">
+          <button id="btn-reject" class="btn btn-reject">REJECT</button>
+          <button id="btn-accept" class="btn btn-accept">ACCEPT</button>
+        </div>
+      </div>
 
-            <button id="accept-button">Accept</button>
-            <button id="reject-button">Reject</button>
+    </div>
+  </section>
 
-        </section>
+  <!-- ======================================================
+       SCREEN 6: RESULT SCREEN
+  ======================================================= -->
+  <section id="screen-result" class="screen">
+    <div class="panel result-panel" id="result-panel">
+      <p class="result-verdict" id="result-verdict">CORRECT</p>
+      <p class="result-action" id="result-action">Applicant rejected.</p>
+      <p class="result-explanation" id="result-explanation">--</p>
 
-        <!-- Result -->
-        <section id="result-screen">
+      <div class="score-box">
+        <div class="score-item">
+          <span class="score-label">FAKE ACCEPTED</span>
+          <span class="score-value" id="score-fake-accepted">0 / 3</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">LEGIT REJECTED</span>
+          <span class="score-value" id="score-legit-rejected">0 / 5</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">CORRECT CALLS</span>
+          <span class="score-value" id="score-correct">0</span>
+        </div>
+      </div>
 
-            <h2 id="result-title"></h2>
-            <p id="result-message"></p>
+      <button id="btn-next" class="btn btn-primary">NEXT APPLICANT</button>
+    </div>
+  </section>
 
-            <button id="next-button">Next Applicant</button>
+  <!-- ======================================================
+       SCREEN 7: GAME OVER SCREEN
+  ======================================================= -->
+  <section id="screen-gameover" class="screen">
+    <div class="panel gameover-panel">
+      <h2 class="gameover-heading">GAME OVER</h2>
+      <p class="gameover-reason" id="gameover-reason">--</p>
 
-        </section>
+      <div class="score-box">
+        <div class="score-item">
+          <span class="score-label">FAKE APPLICANTS ACCEPTED</span>
+          <span class="score-value" id="final-fake-accepted">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">LEGITIMATE APPLICANTS REJECTED</span>
+          <span class="score-value" id="final-legit-rejected">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">CORRECT CALLS</span>
+          <span class="score-value" id="final-correct">0</span>
+        </div>
+      </div>
 
-        <!-- Game Over -->
-        <section id="game-over-screen">
+      <button id="btn-play-again" class="btn btn-primary">PLAY AGAIN</button>
+    </div>
+  </section>
 
-            <h2>Game Over</h2>
-            <p id="game-over-message"></p>
-
-            <button id="restart-message">Play Again</button>
-
-        </section>
-
-    </main>
-
-    <script src="script.js"></script>
-    
+  <script src="script.js"></script>
 </body>
-
 </html>
