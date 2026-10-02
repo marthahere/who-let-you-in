@@ -1,6 +1,6 @@
 **WHO LET YOU IN?**
 
-Play here!: 
+Play here!: https://marthahere.github.io/who-let-you-in/
 
 A browser-based investigation game about identity, digital footprints, and deciding what to trust online.
 
