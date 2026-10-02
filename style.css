@@ -1,0 +1,972 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg-deep: #0a0b0f;
+  --bg-panel: #14161d;
+  --bg-panel-raised: #1b1e27;
+  --border-soft: #262a35;
+  --border-strong: #3a3f4d;
+
+  --text-primary: #edeff5;
+  --text-muted: #9096a7;
+  --text-faint: #565b6b;
+
+  --accent-amber: #ffb648;
+  --accent-amber-dim: #7a5a26;
+  --accent-violet: #8b7cf6;
+  --accent-violet-dim: #443b73;
+  --accent-red: #ef5f56;
+  --accent-green: #5fd68a;
+
+  --font-display: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Basic page setup */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+body {
+  /* Keeps the whole game looking like one interface instead of separate screens */
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(139, 124, 246, 0.05), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(255, 182, 72, 0.04), transparent 45%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: auto, auto, 34px 34px, 34px 34px;
+}
+
+/* Screens are swapped with .active */
+.screen {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  padding: 32px 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* Shared UI used throughout the case screens */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  padding: 26px 30px;
+  position: relative;
+}
+
+.panel::before {
+  /* Small amber strip to give the game more color */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent-amber);
+  opacity: 0.55;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--accent-amber);
+  margin: 0 0 6px;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  margin: 0 0 16px;
+}
+
+.btn {
+  border: 1px solid var(--border-strong);
+  padding: 13px 30px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: var(--bg-panel-raised);
+  color: var(--text-primary);
+  transition:
+    transform 0.08s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.btn:hover {
+  border-color: var(--accent-amber);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent-amber);
+  border-color: var(--accent-amber);
+  color: #1a1200;
+}
+
+.btn-primary:hover {
+  background: #ffc670;
+}
+
+.btn-secondary {
+  background: transparent;
+}
+
+.btn-accept {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #06210f;
+  flex: 1;
+  padding: 16px;
+  font-size: 17px;
+}
+
+.btn-accept:hover {
+  background: #7fe1a3;
+}
+
+.btn-reject {
+  background: transparent;
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  flex: 1;
+  padding: 16px;
+  font-size: 17px;
+}
+
+.btn-reject:hover {
+  background: rgba(239, 95, 86, 0.12);
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.field-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Start screen */
+#screen-title {
+  justify-content: center;
+}
+
+.title-panel {
+  max-width: 700px;
+  width: 100%;
+  padding: 80px 90px;
+  text-align: center;
+}
+
+
+.game-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(34px, 5vw, 44px);
+  letter-spacing: 0.01em;
+  margin: 0 0 12px;
+  color: var(--text-primary);
+}
+
+.title-tagline {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0 0 26px;
+}
+
+.title-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+.title-buttons .btn {
+  min-width: 140px;
+}
+
+.title-toggles {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.toggle-switch {
+  width: 42px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-strong);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-knob {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.toggle-switch[data-on="true"] .toggle-knob {
+  background: var(--accent-amber);
+  transform: translateX(20px);
+}
+
+.coming-soon {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  border: 1px solid var(--border-soft);
+  padding: 3px 8px;
+}
+
+/* Help / instructions */
+.help-panel {
+  max-width: 700px;
+  margin-top: 65px;
+}
+
+.help-intro,
+.help-outro {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.help-list {
+  padding-left: 20px;
+  line-height: 1.9;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.help-list strong {
+  color: var(--accent-amber);
+}
+
+.help-panel .btn {
+  margin-top: 20px;
+}
+
+/* Intro before the first applicant */
+/* Intro before the first applicant */
+#screen-intro {
+  justify-content: center;
+}
+
+.intro-panel {
+  max-width: 700px;
+  width: 100%;
+  text-align: left;
+}
+
+.intro-text {
+  line-height: 1.7;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin: 12px 0 28px;
+}
+
+#btn-begin {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Applicant file shown before investigation starts */
+#screen-applicant {
+  justify-content: center;
+}
+
+.applicant-card {
+  max-width: 680px;
+  width: 100%;
+}
+
+.applicant-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 18px;
+}
+
+.applicant-number {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-amber);
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.applicant-card-body {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 20px;
+}
+
+.avatar-large {
+  border: 2px solid var(--border-strong);
+  background: var(--bg-panel-raised);
+  flex-shrink: 0;
+}
+
+.applicant-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.applicant-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0 0 14px;
+}
+
+.applicant-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}
+
+.applicant-reason {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  padding: 12px 14px;
+  margin-bottom: 24px;
+}
+
+.applicant-reason p {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+/* Main investigation view.
+   Left side = applicant + your notes.
+   Right side = evidence you're checking. */
+#screen-investigation {
+  align-items: stretch;
+  padding: 20px 24px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.investigation-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.invest-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.avatar-small {
+  border: 2px solid var(--border-strong);
+  background: var(--bg-panel-raised);
+  margin-bottom: 8px;
+}
+
+.invest-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  margin: 0;
+}
+
+.invest-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 2px 0 14px;
+}
+
+.controls-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  align-self: flex-start;
+  margin: 0 0 8px;
+}
+
+.invest-summary {
+  width: 100%;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+/* Notes stay attached to the investigator side of the screen */
+.notebook-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
+}
+
+#notebook {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
+  padding: 10px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 100px;
+}
+
+#notebook:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+}
+
+.invest-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+
+/* Switch between records, posts, history, contacts, etc. */
+.category-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 10px;
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  flex-shrink: 0;
+}
+
+.category-arrow {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-arrow:hover {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+}
+
+.category-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--accent-amber);
+  min-width: 200px;
+  text-align: center;
+}
+
+/* Evidence can get long, so only this area scrolls */
+.evidence-panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.evidence-area {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.evidence-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 4px 0 10px;
+}
+
+/* Police / government / official records */
+.record-card {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--accent-violet);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+
+.record-agency {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent-violet);
+  margin: 0 0 8px;
+}
+
+/* Social posts / digital footprint */
+.post-card {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.post-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.post-handle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-amber);
+}
+
+.post-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.post-text {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-primary);
+}
+
+.post-foot {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.post-reply {
+  margin-top: 10px;
+  padding-left: 14px;
+  border-left: 2px solid var(--border-soft);
+}
+
+/* Previous usernames / account changes */
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+.history-row:last-child {
+  border-bottom: none;
+}
+
+.history-username {
+  color: var(--text-primary);
+}
+
+.history-date {
+  color: var(--text-muted);
+}
+
+/* People the player can use as references */
+.reference-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.reference-card {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: left;
+  color: var(--text-primary);
+  min-width: 160px;
+}
+
+.reference-card:hover {
+  border-color: var(--accent-amber);
+}
+
+.reference-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reference-relation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-violet);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reference-phone {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* In-game phone */
+.dialer {
+  max-width: 260px;
+  margin-bottom: 14px;
+}
+
+.dial-display {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-strong);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--accent-amber);
+  margin-bottom: 8px;
+  min-height: 20px;
+}
+
+.dialpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.dial-key {
+  background: var(--bg-panel-raised);
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.dial-key:hover {
+  border-color: var(--accent-amber);
+}
+
+.dial-key-wide {
+  grid-column: span 1;
+}
+
+.dial-key-call {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #06210f;
+  font-weight: 600;
+}
+
+/* Call transcript shown after contacting a reference */
+.transcript {
+  margin-top: 10px;
+}
+
+.transcript-line {
+  display: flex;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.transcript-line:last-child {
+  border-bottom: none;
+}
+
+.transcript-speaker {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  min-width: 90px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.transcript-you .transcript-speaker {
+  color: var(--accent-amber);
+}
+
+.transcript-text {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+/* Accept / reject stay visible below the evidence */
+.decision-row {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/* Results after the player makes a decision */
+#screen-result {
+  justify-content: center;
+}
+
+.result-panel {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  background: var(--bg-panel-raised);
+}
+
+.result-panel.result-correct::before {
+  background: var(--accent-green);
+}
+
+.result-panel.result-incorrect::before {
+  background: var(--accent-red);
+}
+
+.result-verdict {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  letter-spacing: 0.04em;
+  margin: 0 0 6px;
+}
+
+.result-panel.result-correct .result-verdict {
+  color: var(--accent-green);
+}
+
+.result-panel.result-incorrect .result-verdict {
+  color: var(--accent-red);
+}
+
+.result-action {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0 0 12px;
+  color: var(--text-primary);
+}
+
+.result-explanation {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.score-box {
+  background: var(--bg-deep);
+  border: 1px solid var(--border-soft);
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.score-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: 12.5px;
+}
+
+.score-label {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+.score-value {
+  font-family: var(--font-mono);
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+/* End screen when the run is over */
+#screen-gameover {
+  justify-content: center;
+}
+
+.gameover-panel {
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+
+.gameover-panel::before {
+  background: var(--accent-red);
+}
+
+.gameover-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--accent-red);
+  margin: 0 0 14px;
+}
+
+.gameover-reason {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* On phones the investigation columns stack */
+@media (max-width: 760px) {
+  .investigation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .applicant-card-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .applicant-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* There isn't enough vertical room for the desktop layout here */
+  #screen-investigation {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .invest-left {
+    overflow-y: visible;
+  }
+
+  .evidence-panel {
+    min-height: 260px;
+  }
+}
+
+/* Game-style grey scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) var(--bg-deep);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 2px solid var(--bg-deep);
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555b6b;
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--bg-deep);
+}
+
+/* 
+.evidence-panel {
+  border: 1px solid var(--border-soft);
+  box-shadow: none;
+}
+
+.evidence-panel::before {
+  display: none;
+} */
+

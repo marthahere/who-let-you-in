@@ -8,80 +8,82 @@
 </head>
 <body>
 
-  <!-- ======================================================
-       SCREEN 1: TITLE SCREEN
-  ======================================================= -->
+  <!-- SCREEN 1: TITLE SCREEN -->
   <section id="screen-title" class="screen active">
-    <div class="title-bg-shape"></div>
-    <div class="title-content">
-      <p class="eyebrow">ACCESS REVIEW TERMINAL</p>
-      <h1 class="game-title">WHO LET<span class="title-break">YOU IN?</span></h1>
+    <div class="panel title-panel">
+      <p class="eyebrow">MARTHA SABORIT</p>
+      <h1 class="game-title">Who Let You In?</h1>
+      <p class="title-tagline">Is the person behind the screen who they say they are?</p>
       <div class="title-buttons">
         <button id="btn-play" class="btn btn-primary">PLAY</button>
         <button id="btn-help" class="btn btn-secondary">HELP</button>
       </div>
-    </div>
 
-    <div class="title-toggles">
-      <div class="toggle-row">
-        <span class="toggle-label">MUSIC</span>
-        <button id="toggle-music" class="toggle-switch" data-on="false">
-          <span class="toggle-knob"></span>
-        </button>
-      </div>
-      <div class="toggle-row">
-        <span class="toggle-label">AI ASSISTANT</span>
-        <span class="coming-soon">COMING SOON</span>
+      <div class="title-toggles">
+        <div class="toggle-row">
+          <span class="toggle-label">MUSIC</span>
+          <button id="toggle-music" class="toggle-switch" data-on="false">
+            <span class="toggle-knob"></span>
+          </button>
+        </div>
+        <div class="toggle-row">
+          <!-- <span class="toggle-label">AI ASSISTANT</span> 
+          <span class="coming-soon">COMING SOON</span> -->
+          <span class="toggle-label">Thank you for playing!</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 2: HELP SCREEN
-  ======================================================= -->
+  <!-- SCREEN 2: HELP SCREEN -->
   <section id="screen-help" class="screen">
     <div class="panel help-panel">
       <h2 class="panel-title">HOW THIS WORKS</h2>
       <p class="help-intro">
-        Applicants fill out a form. Some of what they say checks out. Some of it doesn't.
+        Applicants fill out a form. Some of what they say is true and some it isn't.
         Your job is to figure out which is which before you decide.
       </p>
       <ul class="help-list">
-        <li><strong>Records</strong> — the official file on this person. Names, birthdays, schools. Sometimes more than one person shows up with a similar name.</li>
-        <li><strong>Digital Footprint</strong> — posts, comments, replies. Most of it is noise. Some of it isn't.</li>
-        <li><strong>Account History</strong> — when the account was made, and what usernames it's used.</li>
-        <li><strong>Connected People</strong> — references the applicant listed. Call them. Ask about the applicant. Listen for anything that doesn't add up.</li>
+        <li><strong>Records</strong> — The official file on this person, including names, birthdays and schools. Sometimes more than one person shows up with a similar name.</li>
+        <li><strong>Digital Footprint</strong> — Take a look at some of their posts, comments and replies. </li>
+        <li><strong>Account History</strong> — When the account was made and previous usernames.</li>
+        <li><strong>Connected People</strong> — References the applicant listed. Call them. Ask about the applicant. Observe if something doesn't add up.</li>
       </ul>
       <p class="help-outro">
-        Take notes as you go. Nothing gets flagged for you automatically.
+        You are provided with a space to take notes as you go.
         When you've made up your mind: <strong>ACCEPT</strong> or <strong>REJECT</strong>.
       </p>
       <button id="btn-help-back" class="btn btn-secondary">BACK</button>
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 3: INTRODUCTION SCREEN
-  ======================================================= -->
+  <!-- SCREEN 3: INTRODUCTION SCREEN -->
   <section id="screen-intro" class="screen">
     <div class="panel intro-panel">
       <p class="eyebrow">FIRST SHIFT</p>
       <p class="intro-text">
-        You're the new moderator for the community's access desk.<br /><br />
-        People apply to join all the time. Most of them are exactly who they say they are.
-        A few aren't.<br /><br />
-        You'll get their application, and you'll have access to records, online activity,
-        and anyone they've listed as a reference. What you do with that is up to you.<br /><br />
-        Let's see how you do.
+        You're covering the access desk for the Velora community this week. 
+        The previous moderator left without much of a handoff, so there isn't 
+        much information available beyond the usual verification process.<br /><br />
+
+        Velora is an online community for people in town. Membership is private, 
+        and every new account has to be verified before access is granted. The 
+        reason for the extra screening isn't explained in the information provided 
+        to moderators.<br><br />
+
+        For each application, you'll have the information submitted by the 
+        applicant, any available public records, their online activity, and the 
+        contacts they've provided. Use those to determine whether the applicant 
+        can be verified.<br><br />
+
+        You choose whether to accept or reject the applicant. 
+        Just remember: once you let someone in, they're in.
       </p>
       <button id="btn-begin" class="btn btn-primary">BEGIN</button>
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 4: APPLICANT SCREEN
-       Wide rectangular profile card, not a tall phone-shaped card.
-  ======================================================= -->
+  <!-- SCREEN 4: APPLICANT SCREEN -->
   <section id="screen-applicant" class="screen">
     <div class="panel applicant-card">
       <div class="applicant-card-header">
@@ -114,9 +116,7 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 5: INVESTIGATION SCREEN
-  ======================================================= -->
+  <!-- SCREEN 5: INVESTIGATION SCREEN -->
   <section id="screen-investigation" class="screen">
     <div class="investigation-layout">
 
@@ -164,9 +164,7 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 6: RESULT SCREEN
-  ======================================================= -->
+  <!-- SCREEN 6: RESULT SCREEN -->
   <section id="screen-result" class="screen">
     <div class="panel result-panel" id="result-panel">
       <p class="result-verdict" id="result-verdict">CORRECT</p>
@@ -192,9 +190,7 @@
     </div>
   </section>
 
-  <!-- ======================================================
-       SCREEN 7: GAME OVER SCREEN
-  ======================================================= -->
+  <!-- SCREEN 7: GAME OVER SCREEN -->
   <section id="screen-gameover" class="screen">
     <div class="panel gameover-panel">
       <h2 class="gameover-heading">GAME OVER</h2>
